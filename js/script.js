@@ -35,16 +35,16 @@ function loadData() {
 
         console.log(data);
 
-        var docs = data.response.docs;
-        console.log(docs);
+        var data = data.response.docs;
+        console.log(data);
 
 
          //need to break it apart before you can start building articles
         // var articles = [];
 
-        // $.each(data, function(key, val) {
+        $.each(data, function(key, val) {
         //     articles.push('<li class="article"' + key + '>' + val + '</li>')
-        // });
+        });
 
 
         // $( "<ul/>", {
