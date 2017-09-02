@@ -35,22 +35,21 @@ function loadData() {
 
         $nytHeaderElem.text("New York Times articles about " + $streetaddress + ',' + $city);
 
-        var newdata = data.response.docs;
+        var article = data.response.docs;
         console.log(newdata);
 
 
          //need to break it apart before you can start building articles
         var articles = [];
 
-        $.each(data, function(key, val) {
-            articles.push('<li class="article"' + key + '>' + val + '</li>')
+        $.each(data, function() {
+            articles.push('<li class="article" data="' + article._id + '">' + article.headline.main + '<br/><p>'+ article.snippet + '</p><p>' + article.web_url + '</p></li>');
         });
 
-
-        // $( "<ul/>", {
-        //     "id": $nytElem,
-        //      html: articles.join( "" )
-        // }).appendTo( "body" );
+        $( "<ul/>", {
+            "id": $nytElem,
+             html: articles.join( "" )
+        }).appendTo( "body" );
 
     }).fail(function() {
 
