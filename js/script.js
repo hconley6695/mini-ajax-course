@@ -28,29 +28,28 @@ function loadData() {
 
     var url = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
     var api_key = "2bd806ac49c342d6b4f15c34562bb856";
-    var nyUrl = url + '?api-key=' + api_key + '&q=' + $city;
+var nyUrl = url + '?api-key=' + api_key + '&q='+ $city + "?";
 
 
     $.getJSON( nyUrl, function (data) {
 
-        console.log(data);
+        $nytHeaderElem.text("New York Times articles about " + $streetaddress + ',' + $city);
 
-        var data = data.response.docs;
-        console.log(data);
+        var article = data.response.docs;
+        console.log(newdata);
 
 
          //need to break it apart before you can start building articles
-        // var articles = [];
+        var articles = [];
 
-        $.each(data, function(key, val) {
-        //     articles.push('<li class="article"' + key + '>' + val + '</li>')
+        $.each(data, function() {
+            articles.push('<li class="article" data="' + article._id + '">' + article.headline.main + '<br/><p>'+ article.snippet + '</p><p>' + article.web_url + '</p></li>');
         });
 
-
-        // $( "<ul/>", {
-        //     "id": $nytElem,
-        //      html: articles.join( "" )
-        // }).appendTo( "body" );
+        $( "<ul/>", {
+            "id": $nytElem,
+             html: articles.join( "" )
+        }).appendTo( "body" );
 
     }).fail(function() {
 
