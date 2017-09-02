@@ -18,7 +18,7 @@ function loadData() {
     $city = $('#city').val();
 
     $img_src = 'http://maps.googleapis.com/maps/api/streetview?size=600x300&location=' + $streetaddress + ',' + $city;
-    $greeting.text('So, you want to live at ' + $streetaddress + ',' + $city + "?")
+    $greeting.text('So, you want to live at ' + $streetaddress + ',' + $city + "?");
     $body.append('<img class="bgimg" src="' + $img_src + '" alt="My House">');
     // END MY CODE
 
@@ -28,22 +28,22 @@ function loadData() {
 
     var url = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
     var api_key = "2bd806ac49c342d6b4f15c34562bb856";
-    var nyUrl = url + '.json?api-key=' + api_key + '&q=' + $city;
+    var nyUrl = url + '?api-key=' + api_key + '&q=' + $streetaddress + ',' + $city + "?";
 
 
     $.getJSON( nyUrl, function (data) {
 
-        console.log(data);
+        $nytHeaderElem.text("New York Times articles about " + $streetaddress + ',' + $city);
 
-        var data = data.response.docs;
-        console.log(data);
+        var newdata = data.response.docs;
+        console.log(newdata);
 
 
          //need to break it apart before you can start building articles
-        // var articles = [];
+        var articles = [];
 
         $.each(data, function(key, val) {
-        //     articles.push('<li class="article"' + key + '>' + val + '</li>')
+            articles.push('<li class="article"' + key + '>' + val + '</li>')
         });
 
 
