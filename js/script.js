@@ -18,7 +18,7 @@ function loadData() {
     $city = $('#city').val();
 
     $img_src = 'http://maps.googleapis.com/maps/api/streetview?size=600x300&location=' + $streetaddress + ',' + $city;
-    $greeting.text('So, you want to live at ' + $streetaddress + ',' + $city + "?");
+    $greeting.text('So, you want to live at ' + $streetaddress + ', ' + $city + "?");
     $body.append('<img class="bgimg" src="' + $img_src + '" alt="My House">');
     // END MY CODE
 
@@ -51,6 +51,11 @@ function loadData() {
 
     // WIKIPEDIA AJAX REQUEST
 
+    // error handling 
+    var wikiError = setTimeout(function() {
+        $wikiElem.text('Wiki articles could not load.');
+    }, 8000);
+
     var wikiUrl = 'https://en.wikipedia.org/w/api.php?action=opensearch&search=' + $city +'&format=json&callback=wikiCallback';
     $.ajax( {
         url: wikiUrl,
@@ -71,7 +76,9 @@ function loadData() {
 
                 $wikiElem.append('<li><a href="'+ url +'">' + article +'</a></li>');
 
-            })
+            });
+
+            clearTimeout(wikiError);
            // do something with data
         }
     } ).error(function() {
