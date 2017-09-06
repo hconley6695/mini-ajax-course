@@ -28,7 +28,8 @@ function loadData() {
 
     var url = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
     var api_key = "2bd806ac49c342d6b4f15c34562bb856";
-    var nyUrl = url + '?api-key=' + api_key + '&q=' + $city;
+var nyUrl = url + '?api-key=' + api_key + '&q='+ $city + "?";
+
 
 
 
@@ -36,7 +37,8 @@ function loadData() {
 
         $nytHeaderElem.text("New York Times articles about " + $streetaddress + ',' + $city);
 
-        var articles = data.response.docs;
+
+        var article = data.response.docs;
 
         articles.forEach(function(article) {
 
@@ -45,6 +47,8 @@ function loadData() {
 
 
     }).error(function() {
+
+         //need to break it apart before you can start building articles
 
         $nytHeaderElem.text('NY Times articles could not be loaded.');
     }); //look at first example to get an idea, function will be run when response returns from the server
