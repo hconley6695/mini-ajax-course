@@ -26,7 +26,7 @@ function loadData() {
 
     // NYTimes Ajax Request here
 
-    var url = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
+    var url = "https://api.nyatimes.com/svc/search/v2/articlesearch.json";
     var api_key = "2bd806ac49c342d6b4f15c34562bb856";
     var nyUrl = url + '?api-key=' + api_key + '&q='+ $city + "?";
 
@@ -43,7 +43,7 @@ function loadData() {
         });
 
 
-    }).fail(function() {
+    }).error(function() {
 
         $nytHeaderElem.text('NY Times articles could not be loaded.');
     }); //look at first example to get an idea, function will be run when response returns from the server
