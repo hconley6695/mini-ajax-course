@@ -35,34 +35,18 @@ function loadData() {
 
         $nytHeaderElem.text("New York Times articles about " + $streetaddress + ',' + $city);
 
-        var article = data.response.docs;
-        console.log(newdata);
+        var articles = data.response.docs;
 
+        articles.forEach(function(article) {
 
-         //need to break it apart before you can start building articles
-        var articles = [];
-
-        $.each(data, function() {
-            articles.push('<li class="article" data="' + article._id + '">' + article.headline.main + '<br/><p>'+ article.snippet + '</p><p>' + article.web_url + '</p></li>');
+            $nytElem.append('<li class="article" data="' + article._id + '"><h3>' + article.headline.main + '</h3><p>'+ article.snippet + '</p><a href="'+ article.web_url +'">' + article.web_url + '</a></li>');
         });
 
-        $( "<ul/>", {
-            "id": $nytElem,
-             html: articles.join( "" )
-        }).appendTo( "body" );
 
     }).fail(function() {
 
         $nytHeaderElem.text('NY Times articles could not be loaded.');
     }); //look at first example to get an idea, function will be run when response returns from the server
-
-    // <ul> 
-    // <li>
-        // <a>
-        // <p>
-    // parse the data
-
-    // how to present it on the page
 
 
     return false;
