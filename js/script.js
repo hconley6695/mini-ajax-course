@@ -28,17 +28,15 @@ function loadData() {
 
     var url = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
     var api_key = "2bd806ac49c342d6b4f15c34562bb856";
-var nyUrl = url + '?api-key=' + api_key + '&q='+ $city + "?";
-
-
+var nyUrl = url + '?api-key=' + api_key + '&q='+ $city;
 
 
     $.getJSON( nyUrl, function (data) {
 
         $nytHeaderElem.text("New York Times articles about " + $streetaddress + ',' + $city);
 
-
         var article = data.response.docs;
+
 
         articles.forEach(function(article) {
 
@@ -47,7 +45,6 @@ var nyUrl = url + '?api-key=' + api_key + '&q='+ $city + "?";
 
 
     }).error(function() {
-
          //need to break it apart before you can start building articles
 
         $nytHeaderElem.text('NY Times articles could not be loaded.');
